@@ -4,13 +4,17 @@
       <h1>Novo Lançamento</h1>
     </div>
 
+    <div class="p-col-12">
+      <p-selectButton [options]="tipos" #tipo></p-selectButton>
+    </div>
+
     <div class="p-col-12 p-md-3 p-fluid">
       <label>Vencimento</label>
-      <input type="text" pInputText />
+      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
     </div>
     <div class="p-col-12 p-md-3 p-fluid">
-      <label>Recebimento</label>
-      <input type="text" pInputText />
+      <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
     </div>
     <div class="p-col-12 p-md-9 p-fluid">
       <label>Descrição</label>
@@ -18,15 +22,17 @@
     </div>
     <div class="p-col-12 p-md-3 p-fluid">
       <label>Valor</label>
-      <input type="text" pInputText placeholder="0,00"/>
+      <input type="text" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" pInputText placeholder="0,00"/>
     </div>
     <div class="p-col-12 p-md-6 p-fluid">
       <label>Categoria</label>
-      <input type="text" pInputText />
+      <p-dropdown [options]="categorias" placeholder="Selecione"
+       [filter]="true"></p-dropdown>
     </div>
     <div class="p-col-12 p-md-6 p-fluid">
       <label>Pessoa</label>
-      <input type="text" pInputText />
+      <p-dropdown [options]="pessoas" placeholder="Selecione"
+       [filter]="true"></p-dropdown>
     </div>
     <div class="p-col-12 p-fluid">
       <label>Observação</label>
@@ -35,7 +41,7 @@
     <div class="p-col-12">
       <button pButton type="submit" label="Salvar" style="margin-right: 5px;"></button>
       <button pButton type="submit" label="Novo" class="p-button-info"></button>
-      <a pButton class="p-button-text" href="javascript:;">Voltar para pesquisa</a>
+      <a pButton class="p-button-text" href="#">Voltar para pesquisa</a>
     </div>
   </div>
 </div>

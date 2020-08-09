@@ -4,6 +4,15 @@ body {
   color: #404C51;
 }/* You can add global styles to this file, and also import other style files */
 
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
 label {
   font-weight: bold;
 }
