@@ -13,8 +13,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule } from '@angular/forms';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
 
 import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -22,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
@@ -31,7 +30,8 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     NavbarComponent,
     PessoasPesquisaComponent,
     LancamentoCadastroComponent,
-    PessoaCadastroComponent
+    PessoaCadastroComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +46,7 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     DropdownModule,
     CurrencyMaskModule,
     InputMaskModule,
-    FormsModule,
-    MessagesModule,
-    MessageModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

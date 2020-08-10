@@ -1,55 +1,57 @@
 <div class="container">
-  <div class="p-grid">
-    <div class="p-col-12">
-      <h1>Novo Lançamento</h1>
-    </div>
-
-    <div class="p-col-12">
-      <p-selectButton [options]="tipos" #tipo></p-selectButton>
-    </div>
-
-    <div class="p-col-12 p-md-3 p-fluid">
-      <label>Vencimento</label>
-      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
-    </div>
-    <div class="p-col-12 p-md-3 p-fluid">
-      <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
-    </div>
-    <div class="p-col-12 p-md-9 p-fluid">
-      <label>Descrição</label>
-      <input type="text" pInputText name="descricao" ngModel #descricao="ngModel" required minlength="5"/>
-      <div class="p-invalid" *ngIf="descricao.hasError('required') && descricao.dirty">
-          Informe uma descrição
+  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>Novo Lançamento</h1>
       </div>
-      <div class="p-invalid" *ngIf="descricao.hasError('minlength') && descricao.dirty">
-        Mínimo de {{ descricao.errors.minlength.requiredLength }} caracteres.
-        Você digitou apenas {{ descricao.errors.minlength.actualLength }}
+
+      <div class="p-col-12">
+        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="vendimento" ngModel #vencimento="ngModel" required></p-calendar>
+        <app-message [control]="vencimento" error="required" text="Informe uma data de vencimento"></app-message>
+      </div>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Descrição</label>
+        <input type="text" pInputText name="descricao" ngModel #descricao="ngModel" required minlength="5"/>
+        <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
+        <app-message [control]="descricao" error="minlength" text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres.
+        Você digitou apenas {{ descricao.errors?.minlength?.actualLength }}"></app-message>
+      </div>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Valor</label>
+        <input type="text" name="valor" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+        pInputText placeholder="0,00" ngModel #valor="ngModel" required/>
+        <app-message [control]="valor" error="required" text="Informe um valor"></app-message>
+      </div>
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Categoria</label>
+        <p-dropdown [options]="categorias" placeholder="Selecione"
+        [filter]="true" name="categoria" ngModel #categoria="ngModel" required></p-dropdown>
+        <app-message [control]="categoria" error="required" text="Informe uma categoria"></app-message>
+      </div>
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Pessoa</label>
+        <p-dropdown [options]="pessoas" placeholder="Selecione"
+        [filter]="true" name="pessoa" ngModel #pessoa="ngModel" required></p-dropdown>
+        <app-message [control]="pessoa" error="required" text="Informe uma pessoa"></app-message>
+      </div>
+      <div class="p-col-12 p-fluid">
+        <label>Observação</label>
+        <textarea rows="3" pInputTextarea ></textarea>
+      </div>
+      <div class="p-col-12">
+        <button pButton type="submit" [disabled]="lancamentoForm.invalid" label="Salvar" style="margin-right: 5px;"></button>
+        <button pButton type="submit" label="Novo" class="p-button-info"></button>
+        <a pButton class="p-button-text" href="#">Voltar para pesquisa</a>
+      </div>
     </div>
-    </div>
-    <div class="p-col-12 p-md-3 p-fluid">
-      <label>Valor</label>
-      <input type="text" name="valor" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
-       pInputText placeholder="0,00" ngModel/>
-    </div>
-    <div class="p-col-12 p-md-6 p-fluid">
-      <label>Categoria</label>
-      <p-dropdown [options]="categorias" placeholder="Selecione"
-       [filter]="true"></p-dropdown>
-    </div>
-    <div class="p-col-12 p-md-6 p-fluid">
-      <label>Pessoa</label>
-      <p-dropdown [options]="pessoas" placeholder="Selecione"
-       [filter]="true"></p-dropdown>
-    </div>
-    <div class="p-col-12 p-fluid">
-      <label>Observação</label>
-      <textarea rows="3" pInputTextarea ></textarea>
-    </div>
-    <div class="p-col-12">
-      <button pButton type="submit" label="Salvar" style="margin-right: 5px;"></button>
-      <button pButton type="submit" label="Novo" class="p-button-info"></button>
-      <a pButton class="p-button-text" href="#">Voltar para pesquisa</a>
-    </div>
-  </div>
+  </form>
 </div>
