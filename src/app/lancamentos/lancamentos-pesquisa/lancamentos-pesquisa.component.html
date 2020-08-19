@@ -54,7 +54,7 @@
             <td class="col-acoes">
               <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 5px;"></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
-              (click)="excluir(lancamento)"></button>
+              (click)="confirmarExclusao(lancamento)"></button>
           </td>
           </tr>
         </ng-template>
@@ -65,5 +65,3 @@
     </div>
   </div>
 </div>
-
-<p-toast key="excluir"></p-toast>

@@ -1,6 +1,6 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -18,7 +18,8 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   constructor(
     private servive: LancamentoService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
     ) { }
 
   ngOnInit() {}
@@ -37,10 +38,19 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
+  confirmarExclusao(lancamento: any) {
+    this.confirmationService.confirm({
+        message: 'Tem certeza que deseja excluir?',
+        accept: () => {
+            this.excluir(lancamento);
+        }
+    });
+  }
+
   excluir(lancamento: any) {
     this.servive.excluir(lancamento.codigo).subscribe(response => {
       this.grid.reset();
-      this.messageService.add({key: 'excluir', severity: 'success', summary: 'Sucesso', detail: 'Lançamento excluído com sucesso'});
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Lançamento excluído com sucesso'});
     });
   }
 }

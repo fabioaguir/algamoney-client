@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -16,9 +20,14 @@ import { CoreModule } from './core/core.module';
     LancamentosModule,
     PessoasModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfirmDialogModule,
+    ToastModule
  ],
-  providers: [],
+  providers: [
+    ConfirmationService,
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
