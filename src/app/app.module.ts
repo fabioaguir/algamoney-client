@@ -17,7 +17,7 @@ import { CoreModule } from './core/core.module';
     PessoasModule,
     CoreModule,
     HttpClientModule
-  ],
+ ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -16,7 +17,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(
-    private servive: LancamentoService
+    private servive: LancamentoService,
+    private messageService: MessageService
     ) { }
 
   ngOnInit() {}
@@ -38,6 +40,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   excluir(lancamento: any) {
     this.servive.excluir(lancamento.codigo).subscribe(response => {
       this.grid.reset();
+      this.messageService.add({key: 'excluir', severity: 'success', summary: 'Sucesso', detail: 'Lançamento excluído com sucesso'});
     });
   }
 }

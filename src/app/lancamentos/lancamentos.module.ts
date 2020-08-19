@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { SharedModule } from './../shared/shared.module';
 import { LancamentoService } from './lancamento.service';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -36,14 +38,16 @@ import { LancamentoService } from './lancamento.service';
     DropdownModule,
     CurrencyMaskModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ToastModule
   ],
   exports: [
     LancamentosPesquisaComponent,
     LancamentoCadastroComponent
   ],
   providers: [
-    LancamentoService
+    LancamentoService,
+    MessageService
   ]
 })
 export class LancamentosModule { }
