@@ -57,4 +57,8 @@ export class LancamentoService {
       })
     );
   }
+
+  excluir(codigo: number): Observable<any> {
+    return this.http.delete<any>(`${this.route}/${codigo}`, {headers: this.headers});
+  }
 }

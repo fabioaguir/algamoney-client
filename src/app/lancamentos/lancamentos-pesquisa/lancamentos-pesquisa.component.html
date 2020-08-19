@@ -33,7 +33,7 @@
     <div class="p-col-12">
       <p-table [value]="lancamentos" [responsive]="true" emptyMessage="Nenhum lançamento encontrado"
       [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
-       (onLazyLoad)="aoMudarPagina($event)">
+       (onLazyLoad)="aoMudarPagina($event)" #tabela>
         <ng-template pTemplate="header">
           <tr>
             <th>Pessoa</th>
@@ -53,7 +53,8 @@
             <td class="col-valor-content" [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor | number:'1.2-2' }}</td>
             <td class="col-acoes">
               <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 5px;"></a>
-              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"></button>
+              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
+              (click)="excluir(lancamento)"></button>
           </td>
           </tr>
         </ng-template>
