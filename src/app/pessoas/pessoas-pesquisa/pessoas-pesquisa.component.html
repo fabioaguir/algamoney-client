@@ -19,7 +19,7 @@
     <div class="p-col-12">
       <p-table [value]="pessoas" [paginator]="true" [rows]="5" [responsive]="true" emptyMessage="Nenhuma pessoa encontrada"
       [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
-       (onLazyLoad)="aoMudarPagina($event)">
+       (onLazyLoad)="aoMudarPagina($event)" #tabela>
         <ng-template pTemplate="header">
           <tr style="text-align: center;">
             <th>Nome</th>
@@ -35,14 +35,15 @@
             <td>{{ pessoa.cidade }}</td>
             <td class="col-data-content">{{ pessoa.estado }}</td>
             <td class="col-data-content">
-              <a href="javascript:;" class="link-status" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
+              <a href="javascript:;" (click)="mudarStatus(pessoa)" class="link-status" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
                     tooltipPosition="top">
                   {{pessoa.ativo ? 'Ativo' : 'Inativo'}}
               </a>
             </td>
             <td class="col-acoes">
               <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 5px;"></a>
-              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"></button>
+              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
+              (click)="confirmarExclusao(pessoa)"></button>
           </td>
           </tr>
         </ng-template>

@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { CategoriaService } from './../../categorias/categoria.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -13,10 +15,7 @@ export class LancamentoCadastroComponent implements OnInit {
     {label: 'Despesa', value: 'DESPESA'},
   ];
 
-  public categorias = [
-    {label: 'Alimentação', value: 1},
-    {label: 'Transporte', value: 2},
-  ];
+  public categorias = [];
 
   public pessoas = [
     {label: 'João da Silva', value: 1},
@@ -24,13 +23,23 @@ export class LancamentoCadastroComponent implements OnInit {
     {label: 'Maria Abadia', value: 3},
   ];
 
-  constructor() { }
+  constructor(
+    private categoriaService: CategoriaService
+  ) { }
 
   ngOnInit(): void {
+    this.carregarCategorias();
   }
 
   salvar(form: NgForm) {
 
+  }
+
+  carregarCategorias() {
+    this.categoriaService.pesquisarTodas().subscribe(categorias => {
+      this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
+    }
+    );
   }
 
 }

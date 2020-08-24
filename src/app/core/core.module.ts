@@ -1,3 +1,8 @@
+import { CategoriaService } from './../categorias/categoria.service';
+import { ErrorHandlerService } from './error-handler.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,10 +12,20 @@ import { CommonModule } from '@angular/common';
     NavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ConfirmDialogModule,
+    ToastModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  providers: [
+    ConfirmationService,
+    MessageService,
+    ErrorHandlerService,
+    CategoriaService
   ]
 })
 export class CoreModule { }

@@ -1,7 +1,8 @@
+import { ErrorHandlerService } from './../core/error-handler.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 
 
@@ -24,7 +25,10 @@ export class LancamentoService {
     Authorization : 'basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private errorHandler: ErrorHandlerService
+    ) { }
 
   pesquisar(filtro: LancamentoFiltro): Observable<any> {
     let params = new HttpParams();
@@ -54,11 +58,20 @@ export class LancamentoService {
         };
 
         return resultado;
+      }),
+      catchError(res => {
+        this.errorHandler.handle(res);
+        return null;
       })
     );
   }
 
   excluir(codigo: number): Observable<any> {
-    return this.http.delete<any>(`${this.route}/${codigo}`, {headers: this.headers});
+    return this.http.delete<any>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
+      catchError(res => {
+        this.errorHandler.handle(res);
+        return null;
+      })
+    );
   }
 }
