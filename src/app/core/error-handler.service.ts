@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,7 +10,7 @@ export class ErrorHandlerService {
 
   constructor(private messageService: MessageService) { }
 
-  handle(errorResponse: any) {
+  handle(errorResponse: any): Observable<any> {
       let msg: string;
 
       if(typeof errorResponse === 'string') {
@@ -33,5 +34,7 @@ export class ErrorHandlerService {
         }
 
       this.messageService.add({severity: 'error', summary: 'Erro', detail: msg});
+
+      return Observable.throw(msg);
   }
 }

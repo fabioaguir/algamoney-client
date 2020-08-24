@@ -1,3 +1,4 @@
+import { Lancamento } from './../core/model';
 import { ErrorHandlerService } from './../core/error-handler.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -59,19 +60,19 @@ export class LancamentoService {
 
         return resultado;
       }),
-      catchError(res => {
-        this.errorHandler.handle(res);
-        return null;
-      })
+      catchError(res => this.errorHandler.handle(res))
     );
   }
 
   excluir(codigo: number): Observable<any> {
     return this.http.delete<any>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
-      catchError(res => {
-        this.errorHandler.handle(res);
-        return null;
-      })
+      catchError(res => this.errorHandler.handle(res))
+    );
+  }
+
+  salvar(lancamento: Lancamento): Observable<Lancamento> {
+    return this.http.post<Lancamento>(`${this.route}`, lancamento, {headers: this.headers}).pipe(
+      catchError(res => this.errorHandler.handle(res))
     );
   }
 }
