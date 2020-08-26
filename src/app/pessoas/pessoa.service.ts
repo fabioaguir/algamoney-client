@@ -1,3 +1,4 @@
+import { Pessoa } from './../core/model';
 import { ErrorHandlerService } from './../core/error-handler.service';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -75,6 +76,12 @@ export class PessoaService {
         this.errorHandler.handle(res);
         return null;
       })
+    );
+  }
+
+  salvar(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.post<Pessoa>(`${this.route}`, pessoa, {headers: this.headers}).pipe(
+      catchError(res => this.errorHandler.handle(res))
     );
   }
 }

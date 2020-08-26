@@ -1,3 +1,6 @@
+import { MessageService } from 'primeng/api';
+import { PessoaService } from './../pessoa.service';
+import { Pessoa } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -8,13 +11,24 @@ import { NgForm } from '@angular/forms';
 })
 export class PessoaCadastroComponent implements OnInit {
 
-  constructor() { }
+  public pessoa = new Pessoa();
+
+  constructor(
+    private pessoaServive: PessoaService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
   }
 
   salvar(form: NgForm) {
-    console.log(form);
+    this.pessoaServive.salvar(this.pessoa).subscribe(resonse => {
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Pessoa adicionada com sucesso'});
+
+      form.reset();
+      this.pessoa = new Pessoa();
+      }
+    );
   }
 
 }
