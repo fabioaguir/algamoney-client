@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CategoriaService } from './../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

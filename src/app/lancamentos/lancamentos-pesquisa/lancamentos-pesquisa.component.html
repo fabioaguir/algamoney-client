@@ -52,7 +52,8 @@
             <td class="col-data-content">{{ lancamento.dataPagamento | date:'dd/MM/y' }}</td>
             <td class="col-valor-content" [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor | number:'1.2-2' }}</td>
             <td class="col-acoes">
-              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 5px;"></a>
+              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 5px;"
+              [routerLink]="['/lancamentos', lancamento.codigo]" routerLinkActive="router-link-active" ></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
               (click)="confirmarExclusao(lancamento)"></button>
           </td>
@@ -61,7 +62,7 @@
       </p-table>
     </div>
     <div class="p-col-12">
-      <p-button type="button" label="Cadastrar Lançamento"></p-button>
+      <a pButton routerLink="/lancamentos/novo" label="Cadastrar Lançamento"></a>
     </div>
   </div>
 </div>

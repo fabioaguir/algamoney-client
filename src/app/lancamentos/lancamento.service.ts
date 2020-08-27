@@ -75,4 +75,31 @@ export class LancamentoService {
       catchError(res => this.errorHandler.handle(res))
     );
   }
+
+  atualizar(lancamento: Lancamento): Observable<Lancamento> {
+    return this.http.put<Lancamento>(`${this.route}/${lancamento.codigo}`, lancamento, {headers: this.headers}).pipe(
+      map((lanc: Lancamento) => {
+        this.converterStringsParaDatas([lanc]);
+        return lanc;
+      }),
+      catchError(res => this.errorHandler.handle(res))
+    );
+  }
+
+  buscarPorCodigo(codigo: number): Observable<Lancamento> {
+    return this.http.get<Lancamento>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
+      map((lanc: Lancamento) => {
+        this.converterStringsParaDatas([lanc]);
+        return lanc;
+      }),
+      catchError(res => this.errorHandler.handle(res))
+    );
+  }
+
+  private converterStringsParaDatas(lancamentos: Lancamento[]) {
+    lancamentos.forEach(lanc => {
+      lanc.dataVencimento = lanc.dataVencimento ? moment(lanc.dataVencimento, 'YYYY-MM-DD').toDate() : null;
+      lanc.dataPagamento = lanc.dataPagamento ? moment(lanc.dataPagamento, 'YYYY-MM-DD').toDate() : null;
+    });
+  }
 }

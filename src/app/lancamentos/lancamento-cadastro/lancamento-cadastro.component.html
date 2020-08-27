@@ -2,7 +2,7 @@
   <form #lancamentoForm="ngForm" autocomplete="off" (ngSubmit)="salvar(lancamentoForm)">
     <div class="p-grid">
       <div class="p-col-12">
-        <h1>Novo Lançamento</h1>
+        <h1>{{ editando ? 'Edição de ' : 'Novo' }} Lançamento</h1>
       </div>
 
       <div class="p-col-12">
@@ -51,8 +51,9 @@
       <div class="p-col-12">
         <button pButton type="submit" [disabled]="lancamentoForm.invalid" label="Salvar"
          style="margin-right: 5px;" [disabled]="lancamentoForm.invalid"></button>
-        <button pButton type="submit" label="Novo" class="p-button-info"></button>
-        <a pButton class="p-button-text" href="#">Voltar para pesquisa</a>
+        <button pButton type="button" label="Novo" class="p-button-info"
+        (click)="novo(lancamentoForm)"></button>
+        <a pButton class="p-button-text" routerLink="/lancamentos">Voltar para pesquisa</a>
       </div>
     </div>
   </form>
