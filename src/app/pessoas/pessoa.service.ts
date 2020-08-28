@@ -84,4 +84,16 @@ export class PessoaService {
       catchError(res => this.errorHandler.handle(res))
     );
   }
+
+  atualizar(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.put<Pessoa>(`${this.route}/${pessoa.codigo}`, pessoa, {headers: this.headers}).pipe(
+      catchError(res => this.errorHandler.handle(res))
+    );
+  }
+
+  buscarPorCodigo(codigo: number): Observable<Pessoa> {
+    return this.http.get<Pessoa>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
+      catchError(res => this.errorHandler.handle(res))
+    );
+  }
 }

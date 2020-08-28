@@ -1,3 +1,4 @@
+import { PessoasRoutingModule } from './pessoas-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -34,12 +35,10 @@ import { PessoaService } from './pessoa.service';
     SelectButtonModule,
     DropdownModule,
     InputMaskModule,
-    SharedModule
+    SharedModule,
+    PessoasRoutingModule
   ],
-  exports: [
-    PessoasPesquisaComponent,
-    PessoaCadastroComponent
-  ],
+  exports: [],
   providers: [
     PessoaService
   ]

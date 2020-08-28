@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { LancamentoService } from '../lancamento.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -30,13 +31,15 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
     this.parametrosDaRota();
     this.carregarCategorias();
     this.carregarPessoas();
+    this.atualizarTituloEdicao();
   }
 
   private parametrosDaRota() {
@@ -50,6 +53,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo).subscribe((lancamento: Lancamento) => {
       this.lancamento = lancamento;
+      this.atualizarTituloEdicao();
     });
   }
 
@@ -78,6 +82,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento).subscribe(lancamento => {
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Lançamento atualizado com sucesso'});
       this.lancamento = lancamento;
+      this.atualizarTituloEdicao();
       }
     );
   }
@@ -101,8 +106,16 @@ export class LancamentoCadastroComponent implements OnInit {
 
     setTimeout(function() {
       this.lancamento = new Lancamento();
+      this.atualizarTituloEdicao();
     }.bind(this), 1);
-    this.router.navigate(['/lacamentos/novo']);
+    this.router.navigate(['lancamentos/novo']);
   }
 
+  atualizarTituloEdicao() {
+    if(this.editando) {
+      this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
+    } else {
+      this.title.setTitle('Novo lançamento');
+    }
+  }
 }

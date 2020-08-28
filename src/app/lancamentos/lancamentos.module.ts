@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -38,12 +38,9 @@ import { LancamentoService } from './lancamento.service';
     CurrencyMaskModule,
     FormsModule,
     SharedModule,
-    RouterModule
+    LancamentosRoutingModule
   ],
-  exports: [
-    LancamentosPesquisaComponent,
-    LancamentoCadastroComponent
-  ],
+  exports: [],
   providers: [
     LancamentoService
   ]

@@ -48,8 +48,8 @@
       </div>
       <div class="p-col-12">
         <button pButton type="submit" [disabled]="pessoaForm.invalid" label="Salvar" style="margin-right: 5px;"></button>
-        <button pButton type="submit" label="Novo" class="p-button-info"></button>
-        <a pButton class="p-button-text" href="#">Voltar para pesquisa</a>
+        <button (click)="novo(pessoaForm)" pButton type="button" label="Novo" class="p-button-info"></button>
+        <a pButton routerLink="/pessoas" class="p-button-text" href="#">Voltar para pesquisa</a>
       </div>
     </div>
   </form>

@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { PessoaService } from './../pessoa.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -19,10 +20,13 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(
     private servive: PessoaService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private title: Title
     ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de pessoas');
+  }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -50,7 +54,7 @@ export class PessoasPesquisaComponent implements OnInit {
   excluir(lancamento: any) {
     this.servive.excluir(lancamento.codigo).subscribe(response => {
       this.grid.reset();
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Lançamento excluído com sucesso'});
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Pessoa excluída com sucesso'});
     });
   }
 
