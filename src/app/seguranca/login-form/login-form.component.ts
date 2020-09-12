@@ -1,5 +1,6 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -8,11 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent {
 
-  constructor(public service: AuthService) { }
+  constructor(
+    public service: AuthService,
+    private router: Router
+    ) { }
 
   login(usuario: string, senha: string) {
     this.service.login(usuario, senha).subscribe(response => {
-
+      this.router.navigate(['/lancamentos']);
     });
   }
 

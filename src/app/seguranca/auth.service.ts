@@ -1,8 +1,10 @@
+
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ErrorHandlerService } from './../core/error-handler.service';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private errorHandler: ErrorHandlerService
     ) {
       this.carregarToken();
      }
@@ -26,7 +29,14 @@ export class AuthService {
 
     return this.http.post(this.oauthTokenUrl, body, { headers }).pipe(
       map((response: any) => this.armazenarToken(response.access_token)),
-      catchError(async (response) => console.log(response))
+      catchError(async (response) => {
+        if (response.error?.error === 'invalid_grant') {
+          this.errorHandler.handle('Usuário ou senha inválida');
+        }
+
+        this.errorHandler.handle(response);
+      })
+
     );
   }
 
