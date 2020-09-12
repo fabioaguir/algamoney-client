@@ -21,8 +21,10 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return '';
-        }
+          return localStorage.getItem('token');
+        },
+        allowedDomains: ['localhost:8080'],
+        disallowedRoutes: ['http://localhost:8080/oauth/token']
       }
   })
   ],
