@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 registerLocaleData(localePt);
 
@@ -22,6 +23,7 @@ registerLocaleData(localePt);
     PessoasModule,
     CoreModule,
     HttpClientModule,
+    SegurancaModule,
     AppRoutingModule
  ],
   providers: [
