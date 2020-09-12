@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent {
 
-  constructor(private service: AuthService) { }
+  constructor(public service: AuthService) { }
 
   login(usuario: string, senha: string) {
     this.service.login(usuario, senha).subscribe(response => {

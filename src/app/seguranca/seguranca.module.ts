@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   imports: [
@@ -16,8 +17,18 @@ import { LoginFormComponent } from './login-form/login-form.component';
     InputTextModule,
     ButtonModule,
 
-    SegurancaRoutingModule
+    SegurancaRoutingModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return '';
+        }
+      }
+  })
   ],
-  declarations: [LoginFormComponent]
+  declarations: [LoginFormComponent],
+  providers: [
+    JwtHelperService
+  ]
 })
 export class SegurancaModule { }
