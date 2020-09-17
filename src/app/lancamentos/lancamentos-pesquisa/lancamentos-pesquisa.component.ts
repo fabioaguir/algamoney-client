@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -19,6 +20,7 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   constructor(
     private servive: LancamentoService,
+    public auth: AuthService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private title: Title

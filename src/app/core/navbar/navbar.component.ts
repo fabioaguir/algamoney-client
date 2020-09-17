@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,4 +9,12 @@ import { Component} from '@angular/core';
 export class NavbarComponent {
 
   public exibindoMenu = false;
+
+  constructor(public auth: AuthService) {}
+
+  criarNovoAccessToken() {
+    this.auth.obterNovoAccessToken().subscribe(x => {
+      console.log('Access token criado');
+    });
+  }
 }
