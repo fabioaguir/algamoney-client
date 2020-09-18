@@ -11,6 +11,7 @@ import { NotAuthenticatedError } from '../core/not-authenticated-error';
 export class AuthService {
 
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  tokensRenokeUrl = 'http://localhost:8080/tokens/revoke';
   jwtPayload: any;
 
   constructor(
@@ -63,6 +64,15 @@ export class AuthService {
     );
   }
 
+  logout() {
+    return this.http.delete(this.tokensRenokeUrl, { withCredentials: true }).pipe(
+      map((response: any) => this.limparAccessToken()),
+      catchError(async (response) => {
+        this.errorHandler.handle(response);
+      })
+    );
+  }
+
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
@@ -82,6 +92,11 @@ export class AuthService {
     const token = localStorage.getItem('token');
 
     return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
   carregarToken() {
