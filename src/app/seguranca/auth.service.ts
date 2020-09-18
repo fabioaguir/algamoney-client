@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from './../core/error-handler.service';
+import { NotAuthenticatedError } from '../core/not-authenticated-error';
 
 @Injectable()
 export class AuthService {
@@ -52,9 +53,11 @@ export class AuthService {
       catchError(async (response) => {
         if (response.error?.error === 'invalid_grant') {
           this.errorHandler.handle('Erro ao renovar token');
+        } else if (response.error?.error === 'invalid_token') {
+          this.errorHandler.handle(new NotAuthenticatedError());
+        } else {
+          this.errorHandler.handle(response);
         }
-
-        this.errorHandler.handle(response);
       })
 
     );
