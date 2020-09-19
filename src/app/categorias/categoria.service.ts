@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ErrorHandlerService } from './../core/error-handler.service';
+import { environment } from './../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
 
-  private route = 'http://localhost:8080/categorias';
+  private route = `${environment.api_url}/categorias`;
 
   private headers = new HttpHeaders()
         .set('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')

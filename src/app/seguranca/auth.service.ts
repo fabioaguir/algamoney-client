@@ -7,11 +7,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from './../core/error-handler.service';
 import { NotAuthenticatedError } from '../core/not-authenticated-error';
 
+import { environment } from './../../environments/environment';
+
 @Injectable()
 export class AuthService {
 
-  oauthTokenUrl = 'http://localhost:8080/oauth/token';
-  tokensRenokeUrl = 'http://localhost:8080/tokens/revoke';
+  oauthTokenUrl = `${environment.api_url}/oauth/token`;
+  tokensRenokeUrl = `${environment.api_url}/tokens/revoke`;
   jwtPayload: any;
 
   constructor(

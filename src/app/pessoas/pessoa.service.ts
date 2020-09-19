@@ -1,9 +1,12 @@
-import { Pessoa } from './../core/model';
-import { ErrorHandlerService } from './../core/error-handler.service';
+
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
+import { environment } from './../../environments/environment';
+import { Pessoa } from './../core/model';
+import { ErrorHandlerService } from './../core/error-handler.service';
 
 export class PessoaFiltro {
   nome: string;
@@ -16,7 +19,7 @@ export class PessoaFiltro {
 })
 export class PessoaService {
 
-  private route = 'http://localhost:8080/pessoas';
+  private route = `${environment.api_url}/pessoas`;
 
   private headers = new HttpHeaders()
         .set('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')

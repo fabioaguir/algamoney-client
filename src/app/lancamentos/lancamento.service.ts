@@ -1,11 +1,13 @@
-import { Lancamento } from './../core/model';
-import { ErrorHandlerService } from './../core/error-handler.service';
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import { environment } from './../../environments/environment';
+import { Lancamento } from './../core/model';
+import { ErrorHandlerService } from './../core/error-handler.service';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -20,7 +22,7 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  private route = 'http://localhost:8080/lancamentos';
+  private route = `${environment.api_url}/lancamentos`;
 
   private headers =  new HttpHeaders({
     Authorization : 'basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
