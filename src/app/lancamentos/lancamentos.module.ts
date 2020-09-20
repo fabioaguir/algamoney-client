@@ -1,5 +1,5 @@
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -31,14 +31,14 @@ import { LancamentoService } from './lancamento.service';
     TableModule,
     TooltipModule,
     InputTextareaModule,
-    BrowserAnimationsModule,
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
     FormsModule,
     SharedModule,
-    LancamentosRoutingModule
+    LancamentosRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [],
   providers: [

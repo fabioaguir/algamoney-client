@@ -6,10 +6,9 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
-import { PessoasModule } from './pessoas/pessoas.module';
-import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localePt);
 
@@ -19,12 +18,11 @@ registerLocaleData(localePt);
   ],
   imports: [
     BrowserModule,
-    LancamentosModule,
-    PessoasModule,
     CoreModule,
     HttpClientModule,
     SegurancaModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
  ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'}
