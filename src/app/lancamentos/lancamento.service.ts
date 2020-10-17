@@ -24,10 +24,6 @@ export class LancamentoService {
 
   private route = `${environment.api_url}/lancamentos`;
 
-  private headers =  new HttpHeaders({
-    Authorization : 'basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
-  });
-
   constructor(
     private http: HttpClient,
     private errorHandler: ErrorHandlerService
@@ -51,7 +47,7 @@ export class LancamentoService {
       params = params.append('dataVencimentoAte', moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return this.http.get<any>(`${this.route}/resumir`, {headers: this.headers, params} ).pipe(
+    return this.http.get<any>(`${this.route}/resumir`, {params} ).pipe(
       map(res => {
         const lancamentos = res.content;
 
@@ -67,19 +63,19 @@ export class LancamentoService {
   }
 
   excluir(codigo: number): Observable<any> {
-    return this.http.delete<any>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
+    return this.http.delete<any>(`${this.route}/${codigo}`).pipe(
       catchError(res => this.errorHandler.handle(res))
     );
   }
 
   salvar(lancamento: Lancamento): Observable<Lancamento> {
-    return this.http.post<Lancamento>(`${this.route}`, lancamento, {headers: this.headers}).pipe(
+    return this.http.post<Lancamento>(`${this.route}`, lancamento).pipe(
       catchError(res => this.errorHandler.handle(res))
     );
   }
 
   atualizar(lancamento: Lancamento): Observable<Lancamento> {
-    return this.http.put<Lancamento>(`${this.route}/${lancamento.codigo}`, lancamento, {headers: this.headers}).pipe(
+    return this.http.put<Lancamento>(`${this.route}/${lancamento.codigo}`, lancamento).pipe(
       map((lanc: Lancamento) => {
         this.converterStringsParaDatas([lanc]);
         return lanc;
@@ -89,7 +85,7 @@ export class LancamentoService {
   }
 
   buscarPorCodigo(codigo: number): Observable<Lancamento> {
-    return this.http.get<Lancamento>(`${this.route}/${codigo}`, {headers: this.headers}).pipe(
+    return this.http.get<Lancamento>(`${this.route}/${codigo}`).pipe(
       map((lanc: Lancamento) => {
         this.converterStringsParaDatas([lanc]);
         return lanc;

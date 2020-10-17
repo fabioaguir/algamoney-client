@@ -1,3 +1,4 @@
+import { DashboardService } from './../dashboard/dashboard.service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,7 +37,8 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
     MessageService,
     ErrorHandlerService,
     CategoriaService,
-    AuthService
+    AuthService,
+    DashboardService
   ]
 })
 export class CoreModule { }

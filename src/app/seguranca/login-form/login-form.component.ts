@@ -16,7 +16,7 @@ export class LoginFormComponent {
 
   login(usuario: string, senha: string) {
     this.service.login(usuario, senha).subscribe(response => {
-      this.router.navigate(['/lancamentos']);
+      this.router.navigate(['/dashboard']);
     });
   }
 

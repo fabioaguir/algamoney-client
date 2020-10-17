@@ -21,7 +21,7 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
               mergeMap(() => {
                 req = req.clone({
                     setHeaders: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 });
                 return next.handle(req);
