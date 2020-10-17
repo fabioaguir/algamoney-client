@@ -1,8 +1,8 @@
 import { MessageService } from 'primeng/api';
 import { PessoaService } from './../pessoa.service';
-import { Pessoa } from './../../core/model';
+import { Contato, Pessoa } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -14,6 +14,12 @@ import { Title } from '@angular/platform-browser';
 export class PessoaCadastroComponent implements OnInit {
 
   public pessoa = new Pessoa();
+
+  public exbindoFormularioContato = false;
+
+  public contato: Contato;
+
+  public contatoIndex: number;
 
   constructor(
     private pessoaServive: PessoaService,
