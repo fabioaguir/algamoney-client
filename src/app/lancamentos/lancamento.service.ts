@@ -94,6 +94,10 @@ export class LancamentoService {
     );
   }
 
+  urlUploadAnexo(): string {
+    return `${this.route}/anexo`;
+  }
+
   private converterStringsParaDatas(lancamentos: Lancamento[]) {
     lancamentos.forEach(lanc => {
       lanc.dataVencimento = lanc.dataVencimento ? moment(lanc.dataVencimento, 'YYYY-MM-DD').toDate() : null;

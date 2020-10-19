@@ -7,12 +7,13 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CalendarModule } from 'primeng/calendar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -26,6 +27,9 @@ import { LancamentoService } from './lancamento.service';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     InputTextModule,
     ButtonModule,
     TableModule,
@@ -35,10 +39,11 @@ import { LancamentoService } from './lancamento.service';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
-    FormsModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
+
     SharedModule,
-    LancamentosRoutingModule,
-    ReactiveFormsModule
+    LancamentosRoutingModule
   ],
   exports: [],
   providers: [

@@ -25,7 +25,8 @@ export class LancamentoCadastroComponent implements OnInit {
   public categorias = [];
   public pessoas = [];
   // lancamento = new Lancamento();
-  formulario: FormGroup;
+  public formulario: FormGroup;
+  public uploadEmAndamento = false;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -62,7 +63,9 @@ export class LancamentoCadastroComponent implements OnInit {
         codigo: [ null, Validators.required ],
         nome: []
       }),
-      observacao: []
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
     });
   }
 
@@ -89,6 +92,48 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.buscarPorCodigo(codigo).subscribe((lancamento: Lancamento) => {
       this.formulario.patchValue(lancamento);
       this.atualizarTituloEdicao();
+    });
+  }
+
+  antesUploadAnexo(event) {
+    this.uploadEmAndamento = true;
+  }
+
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
+  }
+
+  aoTerminarUploadAnexo(event) {
+    const anexo = event.originalEvent.body;
+
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: (anexo.url as string).replace('\\', 'https://')
+    });
+
+    this.uploadEmAndamento = false;
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
+  }
+
+  erroUpload() {
+    this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao tentar enviar anexo!'});
+
+    this.uploadEmAndamento = false;
+  }
+
+  removerAnexo() {
+    this.formulario.patchValue({
+      anexo: null,
+      urlAnexo: null
     });
   }
 

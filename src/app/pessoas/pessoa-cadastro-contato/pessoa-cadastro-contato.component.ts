@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 
 import { Contato } from '../../core/model';
 
@@ -10,10 +10,13 @@ import { Contato } from '../../core/model';
 })
 export class PessoaCadastroContatoComponent implements OnInit {
 
+  public contato: Contato;
+
+  public exbindoFormularioContato = false;
+
+  public contatoIndex: number;
+
   @Input() contatos: Array<Contato>;
-  contato: Contato;
-  exbindoFormularioContato = false;
-  contatoIndex: number;
 
   constructor() { }
 
@@ -32,7 +35,7 @@ export class PessoaCadastroContatoComponent implements OnInit {
     this.contatoIndex = index;
   }
 
-  confirmarContato(frm: FormControl) {
+  confirmarContato(frm: NgForm) {
     const contato = Object.assign({}, this.contato);
     this.contatos[this.contatoIndex] = contato;
 
